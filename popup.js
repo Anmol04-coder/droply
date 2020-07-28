@@ -3,12 +3,19 @@
 // layout for actual code
 
 function setup() {
-    backgroundColor = 225;
-    c = color(HSB, 360, 100, 100);
+    createCanvas(100, 100)
+    colorMode(HSB, 360, 100, 100);
+    backgroundColor = 95;
+    // c = HSB color variable
 }
 
 function draw() {
     background(backgroundColor);
-    fill(c)
-    ellipse();
+    
+    // Need variable for the color in HSB -- can be changed
+    // fill(c)
+    ellipse(10, 10, 20,);
+    
+    // Need variable for hex numeber ${varible}
+    text(`Hex: ` 30, 10);
 }
