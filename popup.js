@@ -1,7 +1,6 @@
 // coding for the popup
-
-// codes for the hex number
-// places the color into the 
+// need code finding hex number before can fully be completed
+// layout for actual code
 
 function setup() {
     backgroundColor = 225;
