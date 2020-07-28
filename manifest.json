@@ -18,7 +18,7 @@
     "<all_urls>"
   ],
   "browser_action": {
-      "default_icon": "droply.png",
+      "default_icon": "logo.png",
       "default_popup": "popup.html",
       "default_title": "Droply"
   }
