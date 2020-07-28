@@ -11,10 +11,15 @@
         "<all_urls>"
       ],
       "js": ["p5.js", "script.js"]
-    }],
+  }],
   "permissions": [
     "background",
     "tabs",
     "<all_urls>"
-  ]
+  ],
+  "browser_action": {
+      "default_icon": "droply.png",
+      "default_popup": "popup.html",
+      "default_title": "Droply"
+  }
 }
