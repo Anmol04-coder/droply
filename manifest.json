@@ -10,7 +10,7 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": ["p5.js", "script.js"]
+      "js": ["script.js"]
   }],
   "permissions": [
     "background",
