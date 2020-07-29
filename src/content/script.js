@@ -18,8 +18,8 @@ function sendMessage(event) {
 			if (window.devicePixelRatio > 1){
 				console.log('its more ye');
 				console.log(window.devicePixelRatio);
-                tempContext.scale(1/window.devicePixelRatio, 1/window.devicePixelRatio);
-            }
+        tempContext.scale(1/window.devicePixelRatio, 1/window.devicePixelRatio);
+      }
 
 			// experimenting with different X and Y values
 			let rect = tempCanvas.getBoundingClientRect();
@@ -30,7 +30,7 @@ function sendMessage(event) {
 			getColor(event.clientX, event.clientY);
 			getColor(event.offsetX, event.offsetY);
 			getColor(event.pageX, event.pageY);
-			getColor(event.screenX, event.screenY); 
+			getColor(event.screenX, event.screenY);
 			getColor(event.layerX, event.layerY);
 		}
 	});

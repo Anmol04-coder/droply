@@ -11,11 +11,11 @@ function setup() {
 
 function draw() {
     background(backgroundColor);
-    
+
     // Need variable for the color in HSB -- can be changed
     // fill(c)
-    ellipse(10, 10, 20,);
-    
+    ellipse(10, 10, 20);
+
     // Need variable for hex numeber ${varible}
     text(`Hex: ` 30, 10);
 }

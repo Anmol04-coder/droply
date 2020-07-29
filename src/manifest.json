@@ -3,14 +3,14 @@
   "name": "Droply",
   "version": "1.0",
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["src/background/background.js"],
     "persistent": false
   },
   "content_scripts": [{
       "matches": [
         "<all_urls>"
       ],
-      "js": ["script.js"]
+      "js": ["src/content/script.js"]
   }],
   "permissions": [
     "background",
@@ -18,8 +18,8 @@
     "<all_urls>"
   ],
   "browser_action": {
-      "default_icon": "logo.png",
-      "default_popup": "popup.html",
+      "default_icon": "assets/logo.png",
+      "default_popup": "src/popup/popup.html",
       "default_title": "Droply"
   }
 }
