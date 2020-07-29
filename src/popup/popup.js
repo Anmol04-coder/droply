@@ -17,8 +17,11 @@ function draw() {
     ellipse(20, 20, 20);
 
     // Need variable for hex numeber ${varible}
+    fill(0, 0, 0);
     textSize(15)
-    text(`Hex: ` ,75, 15);
+    text(`RGB: `,75, 40);
+    text(`HEX: ` ,75, 15);
+    
     
     // alert("Droply\nHex: number");
 
