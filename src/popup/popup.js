@@ -3,19 +3,29 @@
 // layout for actual code
 
 function setup() {
-    createCanvas(100, 100)
-    colorMode(HSB, 360, 100, 100);
-    backgroundColor = 95;
-    // c = HSB color variable
+    createCanvas(200, 50)
+    colorMode(RGB, 255, 255, 255);
+    backgroundColor = 255;
+    c = color(200, 80, 80);
 }
 
 function draw() {
     background(backgroundColor);
 
     // Need variable for the color in HSB -- can be changed
-    // fill(c)
-    ellipse(10, 10, 20);
+    fill(c)
+    ellipse(20, 20, 20);
 
     // Need variable for hex numeber ${varible}
-    text(`Hex: ` 30, 10);
+    textSize(15)
+    text(`Hex: ` ,75, 15);
+    
+    // alert("Droply\nHex: number");
+
 }
+
+/* function newPopup(url) {
+    popupWindow = window.opem(url, 'popUpWindow', 'height = 300, width = 400, left = 10, top = 10, resizable = yes, scrollbars = yes, toolbars = yes, menubars = no, location = no, directories = no, status = yes')
+} */
+
+
