@@ -14,7 +14,7 @@ function sendMessage(event) {
 
 			tempContext.drawImage(img, 0, 0);
 
-			// Use pixel ratio sure to make sure it works on screens with very high resolutions like Retina
+			// Use pixel ratio to make sure it works on screens with very high resolutions like Retina
 			getColor(event.clientX * window.devicePixelRatio, event.clientY * window.devicePixelRatio);
 		}
 	});
@@ -26,6 +26,18 @@ function getColor(x, y) {
 	let green = pixel[1];
 	let blue = pixel[2];
 	console.log([red, green, blue]);
+
+	var iframe = document.createElement('iframe');
+	iframe.style.background = "green";
+	iframe.style.height = "100%";
+	iframe.style.width = "360px";
+	iframe.style.position = "fixed";
+	iframe.style.top = "0px";
+	iframe.style.right = "0px";
+	iframe.style.zIndex = "9000000000000000000";
+	iframe.frameBorder = "none";
+
+document.body.appendChild(iframe);
 }
 
 document.addEventListener("click", sendMessage, false);
