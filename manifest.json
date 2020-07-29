@@ -6,6 +6,11 @@
     "scripts": ["src/background/background.js"],
     "persistent": false
   },
+  "icons": {
+    "16": "assets/logo16.png",
+    "48": "assets/logo48.png",
+    "128": "assets/logo128.png"
+  },
   "content_scripts": [{
       "matches": [
         "<all_urls>"
@@ -19,7 +24,7 @@
     "activeTab"
   ],
   "browser_action": {
-      "default_icon": "assets/logo.png",
+      "default_icon": "assets/logo48.png",
       "default_popup": "src/popup/popup.html",
       "default_title": "Droply"
   }
