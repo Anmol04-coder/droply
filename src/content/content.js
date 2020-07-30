@@ -29,7 +29,8 @@ function getColor(x, y) {
 
 	let iframe = document.createElement('iframe');
 	iframe.onload = function() {
-		iframe.style.background = "#071a52";
+		// iframe.style.background = "#071a52";
+		iframe.style.background = "#EEEEEE";
 		iframe.style.height = "50%";
 		iframe.style.width = "160px";
 		iframe.style.position = "fixed";
@@ -46,10 +47,13 @@ function getColor(x, y) {
 		ctx.beginPath();
 		ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
 		ctx.rect(10, 10, 100, 100);
+        ctx.rect.lineWidth = "5px";
+        ctx.rect.strokeStyle = "black";
+        ctx.stroke();
 		ctx.fill();
 
 		let rgbParagraph = iframeDocument.createElement("p");
-		let rgbText = iframeDocument.createTextNode(`RGB: ${[red, green, blue]}`);
+		let rgbText = iframeDocument.createTextNode(`RGB: (${[red, green, blue]})`);
 		rgbParagraph.appendChild(rgbText);
 
 		let hexParagraph = iframeDocument.createElement("p");
@@ -72,7 +76,8 @@ function getColor(x, y) {
 
 		iframeDocument.body.style.fontFamily = 'Open Sans';
 		iframeDocument.body.style.fontWeight = '200';
-		iframeDocument.body.style.color = 'white';
+		// iframeDocument.body.style.color = 'white';
+        iframeDocument.body.style.color = '333333';
 		iframeDocument.body.style.paddingLeft = "10px";
 	}
 
