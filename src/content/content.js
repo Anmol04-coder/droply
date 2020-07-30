@@ -27,17 +27,56 @@ function getColor(x, y) {
 	let blue = pixel[2];
 	console.log([red, green, blue]);
 
-	var iframe = document.createElement('iframe');
-	iframe.style.background = "green";
-	iframe.style.height = "100%";
-	iframe.style.width = "360px";
-	iframe.style.position = "fixed";
-	iframe.style.top = "0px";
-	iframe.style.right = "0px";
-	iframe.style.zIndex = "9000000000000000000";
-	iframe.frameBorder = "none";
+	let iframe = document.createElement('iframe');
+	iframe.onload = function() {
+		iframe.style.background = "#071a52";
+		iframe.style.height = "50%";
+		iframe.style.width = "160px";
+		iframe.style.position = "fixed";
+		iframe.style.top = "0px";
+		iframe.style.right = "0px";
+		iframe.style.zIndex = "1000000000";
+		iframe.frameBorder = "none";
 
-document.body.appendChild(iframe);
+		let iframeDocument = iframe.contentDocument;
+
+		let c = iframeDocument.createElement('canvas');
+		let ctx = c.getContext("2d");
+
+		ctx.beginPath();
+		ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+		ctx.rect(10, 10, 100, 100);
+		ctx.fill();
+
+		let rgbParagraph = iframeDocument.createElement("p");
+		let rgbText = iframeDocument.createTextNode(`RGB: ${[red, green, blue]}`);
+		rgbParagraph.appendChild(rgbText);
+
+		let hexParagraph = iframeDocument.createElement("p");
+		let hexText = iframeDocument.createTextNode(`HEX: `);
+		hexParagraph.appendChild(hexText);
+
+		let hslParagraph = iframeDocument.createElement("p");
+		let hslText = iframeDocument.createTextNode(`HSL: `);
+		hslParagraph.appendChild(hslText);
+
+		let cmykParagraph = iframeDocument.createElement("p");
+		let cmykText = iframeDocument.createTextNode(`CMYK: `);
+		cmykParagraph.appendChild(cmykText);
+
+		iframeDocument.body.appendChild(c);
+		iframeDocument.body.appendChild(rgbParagraph);
+		iframeDocument.body.appendChild(hexParagraph);
+		iframeDocument.body.appendChild(hslParagraph);
+		iframeDocument.body.appendChild(cmykParagraph);
+
+		iframeDocument.body.style.fontFamily = 'Open Sans';
+		iframeDocument.body.style.fontWeight = '200';
+		iframeDocument.body.style.color = 'white';
+		iframeDocument.body.style.paddingLeft = "10px";
+	}
+
+	document.body.appendChild(iframe);
 }
 
 document.addEventListener("click", sendMessage, false);
