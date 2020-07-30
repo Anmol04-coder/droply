@@ -3,9 +3,14 @@ let tempContext = tempCanvas.getContext('2d');
 
 // Stop the pointer events to prevent accidental button clicking when picking a color
 document.body.style['pointer-events'] = 'none';
-let iframe = document.createElement('iframe');
 
-function sendMessage(event) {
+let iframe = document.createElement('iframe');
+let iframeDocument;
+setupIframe();
+
+document.addEventListener("click", captureCurrentPixel, false);
+
+function captureCurrentPixel(e) {
 	chrome.runtime.sendMessage({message: 'capture'}, (currentScreen) => {
 		let img = new Image();
 		img.src = currentScreen.imgSrc;
@@ -16,7 +21,7 @@ function sendMessage(event) {
 			tempContext.drawImage(img, 0, 0);
 
 			// Use pixel ratio to make sure it works on screens with very high resolutions like Retina
-			getColor(event.clientX * window.devicePixelRatio, event.clientY * window.devicePixelRatio);
+			getColor(e.clientX * window.devicePixelRatio, e.clientY * window.devicePixelRatio);
 		}
 	});
 }
@@ -27,72 +32,75 @@ function getColor(x, y) {
 	let green = pixel[1];
 	let blue = pixel[2];
 	console.log([red, green, blue]);
+	let rgbString = `(${red}, ${green}, ${blue})`;
 
+	setupIframe(rgbString);
+
+	document.body.style['pointer-events'] = 'auto';
+}
+
+function setupIframe(color = null) {
 	iframe.onload = function() {
-		// iframe.style.background = "#071a52";
 		iframe.style.background = "#EEEEEE";
 		iframe.style.height = "50%";
-		iframe.style.width = "160px";
+		iframe.style.width = "180px";
 		iframe.style.position = "fixed";
 		iframe.style.top = "0px";
 		iframe.style.right = "0px";
 		iframe.style.zIndex = "1000000000";
+		iframe.style.overflow = "hidden";
 		iframe.frameBorder = "none";
 
-		let iframeDocument = iframe.contentDocument;
+		iframeDocument = iframe.contentDocument;
 
-		let closeButton = iframeDocument.createElement("p");
-		let closeSymbol = iframeDocument.createTextNode("✕");
-		closeButton.style.textAlign = "right";
-		closeButton.onclick = stopExtension;
-		closeButton.appendChild(closeSymbol);
-
-		let c = iframeDocument.createElement('canvas');
-		let ctx = c.getContext("2d");
-
-		ctx.beginPath();
-		ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
-		ctx.rect(10, 10, 100, 100);
-    ctx.rect.lineWidth = "5px";
-    ctx.rect.strokeStyle = "black";
-    ctx.stroke();
-		ctx.fill();
-
-		let rgbParagraph = iframeDocument.createElement("p");
-		let rgbText = iframeDocument.createTextNode(`RGB: (${[red, green, blue]})`);
-		rgbParagraph.appendChild(rgbText);
-
-		let hexParagraph = iframeDocument.createElement("p");
-		let hexText = iframeDocument.createTextNode(`HEX: `);
-		hexParagraph.appendChild(hexText);
-
-		let hslParagraph = iframeDocument.createElement("p");
-		let hslText = iframeDocument.createTextNode(`HSL: `);
-		hslParagraph.appendChild(hslText);
-
-		let cmykParagraph = iframeDocument.createElement("p");
-		let cmykText = iframeDocument.createTextNode(`CMYK: `);
-		cmykParagraph.appendChild(cmykText);
-
-		iframeDocument.body.appendChild(closeButton);
-		iframeDocument.body.appendChild(c);
-		iframeDocument.body.appendChild(rgbParagraph);
-		iframeDocument.body.appendChild(hexParagraph);
-		iframeDocument.body.appendChild(hslParagraph);
-		iframeDocument.body.appendChild(cmykParagraph);
+		showClose();
+		showRect(color);
+		showParagraph(`RGB: ${color}`);
+		showParagraph(`HEX: ${color}`);
+		showParagraph(`HSL: ${color}`);
+		showParagraph(`CMYK: ${color}`);
 
 		iframeDocument.body.style.fontFamily = 'Open Sans';
 		iframeDocument.body.style.fontWeight = '200';
-		// iframeDocument.body.style.color = 'white';
     iframeDocument.body.style.color = '#333333';
 		iframeDocument.body.style.paddingLeft = "10px";
+		iframeDocument.style.overflow = "hidden";
 	}
-
 	document.body.appendChild(iframe);
-	document.body.style['pointer-events'] = 'auto';
 }
 
-document.addEventListener("click", sendMessage, false);
+function showClose() {
+	let closeButton = iframeDocument.createElement("p");
+	let closeSymbol = iframeDocument.createTextNode("✕");
+	closeButton.style.textAlign = "right";
+	closeButton.onclick = stopExtension;
+	closeButton.appendChild(closeSymbol);
+
+	iframeDocument.body.appendChild(closeButton);
+}
+
+function showRect(color = null) {
+	let c = iframeDocument.createElement('canvas');
+	let ctx = c.getContext("2d");
+
+	ctx.beginPath();
+	if (color != null) { ctx.fillStyle = `rgb${color}`}
+	ctx.rect(10, 10, 100, 100);
+	ctx.rect.lineWidth = "5px";
+	ctx.rect.strokeStyle = "black";
+	ctx.stroke();
+	ctx.fill();
+
+	iframeDocument.body.appendChild(c);
+}
+
+function showParagraph(text) {
+	let paragraph = iframeDocument.createElement("p");
+	let textElement = iframeDocument.createTextNode(text);
+	paragraph.appendChild(textElement);
+
+	iframeDocument.body.appendChild(paragraph);
+}
 
 function stopExtension() {
 	iframe.parentNode.removeChild(iframe);
