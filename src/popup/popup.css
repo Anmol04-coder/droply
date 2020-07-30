@@ -1,5 +1,25 @@
 h1 {
-  color: black;
-  margin-left: 10px;
-  font: 15px Impact, fantasy 
+  color: #333333;
+  font: 30px Impact, Charcoal, sans-serif;
+  font-weight: bold;
+}
+
+h2 {
+  color: #333333;
+  /* margin-left: 5px; */
+  font: 20px Impact, Charcoal, sans-serif 
+  font-weight: bold;
+  
+}
+
+p {
+  color: #333333;
+  font: 15px Impact, Charcoal, sans-serif
+}
+
+.popup {
+    background-color: #EEEEEE;
+    width: 100px;
+    height: 450px;
+    border: 0px solid transparent; 
 }
