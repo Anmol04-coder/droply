@@ -3,6 +3,7 @@ let tempContext = tempCanvas.getContext('2d');
 
 // Stop the pointer events to prevent accidental button clicking when picking a color
 document.body.style['pointer-events'] = 'none';
+let iframe = document.createElement('iframe');
 
 function sendMessage(event) {
 	chrome.runtime.sendMessage({message: 'capture'}, (currentScreen) => {
@@ -27,7 +28,6 @@ function getColor(x, y) {
 	let blue = pixel[2];
 	console.log([red, green, blue]);
 
-	let iframe = document.createElement('iframe');
 	iframe.onload = function() {
 		// iframe.style.background = "#071a52";
 		iframe.style.background = "#EEEEEE";
@@ -41,15 +41,21 @@ function getColor(x, y) {
 
 		let iframeDocument = iframe.contentDocument;
 
+		let closeButton = iframeDocument.createElement("p");
+		let closeSymbol = iframeDocument.createTextNode("✕");
+		closeButton.style.textAlign = "right";
+		closeButton.onclick = stopExtension;
+		closeButton.appendChild(closeSymbol);
+
 		let c = iframeDocument.createElement('canvas');
 		let ctx = c.getContext("2d");
 
 		ctx.beginPath();
 		ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
 		ctx.rect(10, 10, 100, 100);
-        ctx.rect.lineWidth = "5px";
-        ctx.rect.strokeStyle = "black";
-        ctx.stroke();
+    ctx.rect.lineWidth = "5px";
+    ctx.rect.strokeStyle = "black";
+    ctx.stroke();
 		ctx.fill();
 
 		let rgbParagraph = iframeDocument.createElement("p");
@@ -68,6 +74,7 @@ function getColor(x, y) {
 		let cmykText = iframeDocument.createTextNode(`CMYK: `);
 		cmykParagraph.appendChild(cmykText);
 
+		iframeDocument.body.appendChild(closeButton);
 		iframeDocument.body.appendChild(c);
 		iframeDocument.body.appendChild(rgbParagraph);
 		iframeDocument.body.appendChild(hexParagraph);
@@ -77,11 +84,16 @@ function getColor(x, y) {
 		iframeDocument.body.style.fontFamily = 'Open Sans';
 		iframeDocument.body.style.fontWeight = '200';
 		// iframeDocument.body.style.color = 'white';
-        iframeDocument.body.style.color = '333333';
+    iframeDocument.body.style.color = '#333333';
 		iframeDocument.body.style.paddingLeft = "10px";
 	}
 
 	document.body.appendChild(iframe);
+	document.body.style['pointer-events'] = 'auto';
 }
 
 document.addEventListener("click", sendMessage, false);
+
+function stopExtension() {
+	iframe.parentNode.removeChild(iframe);
+}
