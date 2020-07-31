@@ -1,3 +1,4 @@
+let children = document.body.children; // for pointer-events control
 let iframe = document.createElement('iframe');
 let iframeDocument;
 
@@ -71,4 +72,6 @@ function stopExtension() {
 	for (let i = 0; i < children.length; i++) {
 		children[i].style['pointer-events'] = 'auto';
 	}
+
+  document.removeEventListener('click', captureCurrentPixel, false);
 }

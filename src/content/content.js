@@ -1,8 +1,12 @@
 let tempCanvas = document.createElement('canvas');
 let tempContext = tempCanvas.getContext('2d');
 
-// Stop the pointer events to prevent accidental button clicking when picking a color
-document.body.style['pointer-events'] = 'none';
+// Stop the pointer events (except for iframe) to prevent accidental button clicking when picking a color
+for (let i = 0; i < children.length; i++) {
+	if (children[i].id != 'droplyIframe') {
+		children[i].style['pointer-events'] = 'none';
+	}
+}
 
 // Listen for clicks on the page and call capturing once the event happens
 document.addEventListener("click", captureCurrentPixel, false);
@@ -30,6 +34,4 @@ function getColor(x, y) {
 	let blue = pixel[2];
 
 	setupIframe(red, green, blue);
-
-	document.body.style['pointer-events'] = 'auto';
 }
