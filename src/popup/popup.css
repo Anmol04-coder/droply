@@ -1,25 +1,33 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,500,700);
+
+body {
+  background-color: #EEEEEE;
+}
+
 h1 {
-  color: #333333;
-  font: 30px Impact, Charcoal, sans-serif;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 22px;
 }
 
 h2 {
-  color: #333333;
-  /* margin-left: 5px; */
-  font: 20px Impact, Charcoal, sans-serif 
-  font-weight: bold;
-  
+  font-weight: 500;
+  font-size: 18px;
 }
 
 p {
-  color: #333333;
-  font: 15px Impact, Charcoal, sans-serif
+  font-weight: 300;
+  font-size: 14px;
 }
 
 .popup {
-    background-color: #EEEEEE;
-    width: 100px;
-    height: 450px;
-    border: 0px solid transparent; 
+  color: #333333;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  width: 300px;
+  height: 280px;
+}
+
+.icon {
+  height: 25px;
+  width: 25px;
 }
