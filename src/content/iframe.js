@@ -24,6 +24,12 @@ function setupIframe(r, g, b) {
 		showParagraph(`HEX: ${rgbToHex(r, g, b)}`);
 		showParagraph(`HSL: ${rgbToHsl(r, g, b)}`);
 
+    let link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('type', 'text/css');
+    link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Open+Sans:200');
+    document.head.appendChild(link);
+
 		iframeDocument.body.style.fontFamily = 'Open Sans';
 		iframeDocument.body.style.fontWeight = '200';
     iframeDocument.body.style.color = '#333333';
