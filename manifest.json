@@ -15,7 +15,7 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": ["src/content/convertion.js", "src/content/content.js"]
+      "js": ["src/content/convertion.js", "src/content/iframe.js", "src/content/content.js"]
   }],
   "permissions": [
     "background",
